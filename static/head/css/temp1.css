@@ -1,0 +1,7 @@
+.temp1{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    height: 20px;
+    align-items: center;
+}
