@@ -1,0 +1,36 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/logincss.css' %}" />
+  </head>
+  <body>
+    <!-- partial:index.partial.html -->
+    <div id="bg"></div>
+    <form action="" method="POST">
+      <div id="form-field"><h1>Login</h1></div>
+      {% csrf_token %}
+      <div class="form-field">
+        <input
+          type="text"
+          name="username"
+          placeholder="Email / Username"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+
+      <div class="form-field">
+        <input type="submit" value="Log in" class="btn" />
+      </div>
+    </form>
+    <!-- partial -->
+  </body>
+</html>

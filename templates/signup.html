@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block body_block %}
+
+<div
+  class="card"
+  style="
+    position: relative;
+    width: 60%;
+    left: 20%;
+    right: 20%;
+    align-content: center;
+  "
+>
+  <img
+    src="http://127.0.0.1:8000/media/system/signupbg.jpg"
+    class="card-img-top"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">SignUp</h5>
+    <p class="card-text">
+      Enter correct details for your successfull registration. USERNAME must be
+      unique.
+    </p>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        {% if registered %}
+        <h1>SignUp successfull...</h1>
+        <div class="d-inline p-2 bg-primary text-white">
+          <a href="{% url 'home' %}" style="color: black">home</a>
+        </div>
+        {% else %}
+        <h1>Enter Details To SIGNUP</h1>
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %} {{ user_form.as_p }} {{ profile_form.as_p }}
+          <input
+            type="submit"
+            name="signup"
+            class="btn btn-primary"
+            value="signup"
+          />
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

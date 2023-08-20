@@ -1,0 +1,58 @@
+{% extends "headbase.html" %} {% block body_block %} {% load static %}
+<head>
+  <style>
+    body{
+      color: aliceblue;
+      background-color:#1b263b;
+    }
+    .todo1 {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      border: 2px solid ;
+      margin-right: 5%;
+      margin-left: 5%;
+      background-color:#778da9;
+      
+    }
+    .item {
+      flex-basis: 33.33%;
+      margin-left: 5%;
+      text-decoration: none;
+      color: aliceblue;
+     
+    }
+    .box {
+      background-color: #415a77;
+      width: 60%;
+      margin-left: 20%;
+      margin-right: 20%;
+      overflow: auto;
+      border-radius: 20px;
+      padding-bottom: 20px;
+    
+    }
+  </style>
+</head>
+<!-- karthik -->
+<h1> COMPLAINTS TODO</h1>
+<br>
+<div class="box">
+  
+    
+  
+  {% for com in todocomplaints %}
+  <br />
+
+  <div class="todo1">
+    <a href="{% url 'tododes' com.pk %}" class="item">
+      <h3>{{ com.complaint_name }}</h1>
+    </a>
+    <h5 class="item">{{ com.city }}</h3>
+    <a href="{% url 'solvefunc' com.pk %}" class="item btn-primary" style="text-align: center; margin-right: 2%; border-radius: 5px;"> solve </a>
+  </div>
+
+  {% endfor %}
+
+</div>
+{% endblock %}

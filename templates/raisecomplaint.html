@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block body_block %}
+<head>
+  <style>
+    body {
+      background-color: #8096bd;
+      color: #1b263b;
+    }
+  </style>
+</head>
+<br />
+<div
+  class="card"
+  style="
+    position: relative;
+    width: 60%;
+    left: 20%;
+    right: 20%;
+    align-content: center;
+    background-color: #415a77;
+  "
+>
+  <img
+    src="http://127.0.0.1:8000/media/system/raisecomplaint.jpg"
+    class="card-img-top"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title" style="color: #090c11">RAISE COMPLAINT</h5>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %} {{ raisecomplaint_form.as_p }}
+          <input
+            type="submit"
+            name="signup"
+            class="btn btn-primary"
+            value="Raise Complaint"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

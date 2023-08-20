@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/f2635aa651.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      .temp1 {
+        border: 2px solid #282c33;
+        height: 320px;
+        width: 320px;
+        background-color: #778da9;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+          0 6px 20px 0 rgba(33, 8, 8, 0.19);
+        margin: 10px 10px 10px 10px;
+        display: grid;
+        align-items: end;
+        overflow: auto;
+        border-radius: 10px;
+        font-family: "Instrument Serif", serif;
+        font-size: 16px;
+        margin-left: 3%;
+        padding: 5px 5px 5px 5px;
+      }
+      .temp1:hover {
+        width: 380px;
+        height: 380px;
+      }
+      .temp2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      div::-webkit-scrollbar {
+        width: 0px; /* Safari and Chrome */
+        height: 0px;
+      }
+      img {
+        height: 200px;
+        width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      body {
+        background-color: #415a77;
+        color: white;
+      }
+      .like {
+        background-color: #f0f3f7;
+        margin-bottom: 2%;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light sticky-top"
+      style="
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        border-radius: 3px;
+        margin-top: 10px;
+        background-color: #6c757d;
+      "
+    >
+      <div
+        class="div1 item"
+        style="
+          display: flex;
+          justify-content: flex-start;
+          width: 80%;
+          position: absolute;
+          bottom: 2px;
+        "
+      >
+        <a class="navbar-brand item" href="{% url 'headbase' %}">HOME</a>
+        <a
+          class="admin"
+          aria-current="page"
+          href="{% url 'todo' %}"
+          style="
+            margin-left: 5%;
+            text-decoration: none;
+            color: black;
+            margin-top: 7px;
+          "
+          >TO DO</a
+        >
+        <a
+          class="admin"
+          aria-current="page"
+          href="{% url 'solved' %}"
+          style="
+            margin-left: 5%;
+            text-decoration: none;
+            color: black;
+            margin-top: 7px;
+          "
+          >Solved</a
+        >
+      </div>
+      <div class="dropdown item" style="position: absolute; right: 5%">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="img"
+            src="https://t3.ftcdn.net/jpg/05/17/79/88/360_F_517798849_WuXhHTpg2djTbfNf0FQAjzFEoluHpnct.jpg"
+            style="
+              border-radius: 50%;
+              position: inherit;
+              right: 20px;
+              width: 30px;
+              height: 30px;
+            "
+          />
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% if user.is_authenticated %} {% if user_info.head %}
+          <a class="dropdown-item logout admin" href="{% url 'home' %}"
+            >userLogin</a
+          >
+          {% endif %}
+          <a class="dropdown-item logout admin" href="{% url 'logout' %}"
+            >Logout</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Initialize the dropdown component -->
+      <script>
+        $(document).ready(function () {
+          $(".dropdown-toggle").dropdown();
+        });
+      </script>
+    </nav>
+    {% block body_block %}
+    <br />
+    <div class="container">
+      <h1>Pending Complaints</h1>
+      {% for com in complaints %} {% if forloop.counter0|divisibleby:3 %}
+      <div class="row">
+        {% endif %}
+        <div class="col-lg-4 col-md-6 temp2">
+          <div class="temp1">
+            <h1>{{ com.complaint_name }}</h1>
+            <img src="{{ com.complaint_image.url }}" alt="" />
+            <p>{{ com.complaint_description }}</p>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 or forloop.last %}
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </body>
+  {% endblock %}
+</html>

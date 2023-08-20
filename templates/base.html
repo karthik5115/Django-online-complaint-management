@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>base</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="{% static 'css/basecss.css'%}" /> -->
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light sticky-top"
+      style="
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        border-radius: 3px;
+        margin-top: 10px;
+        background-color: #6c757d;
+      "
+    >
+      <div
+        class="div1 item"
+        style="
+          display: flex;
+          justify-content: flex-start;
+          width: 80%;
+          position: absolute;
+          bottom: 2px;
+        "
+      >
+        <a class="navbar-brand item" href="{% url 'home' %}">HOME</a>
+
+        <a
+          class="admin"
+          aria-current="page"
+          href="{% url 'raise_complaint' %}"
+          style="
+            margin-left: 5%;
+            text-decoration: none;
+            color: black;
+            margin-top: 7px;
+          "
+          >raise complaint</a
+        >
+        <a
+          class="admin"
+          aria-current="page"
+          href="{% url 'mycomplaints' %}"
+          style="
+            margin-left: 5%;
+            text-decoration: none;
+            color: black;
+            margin-top: 7px;
+          "
+          >mycomplaints</a
+        >
+      </div>
+      <div class="dropdown item" style="position: absolute; right: 5%">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="img"
+            src="https://t3.ftcdn.net/jpg/05/17/79/88/360_F_517798849_WuXhHTpg2djTbfNf0FQAjzFEoluHpnct.jpg"
+            style="
+              border-radius: 50%;
+              position: inherit;
+              right: 20px;
+              width: 30px;
+              height: 30px;
+            "
+          />
+        </button>
+        <div
+          class="dropdown-menu bg-light"
+          aria-labelledby="dropdownMenuButton "
+          style="background-color: aliceblue"
+        >
+          {% if user.is_authenticated %} {% if user_info.head %}
+          <a class="dropdown-item logout admin" href="{% url 'headbase' %}"
+            >headLogin</a
+          >
+          {% endif %}
+          <a class="dropdown-item logout admin" href="{% url 'logout' %}"
+            >Logout</a
+          >
+          {% else %}
+          <a class="dropdown-item signup admin" href="{% url 'signup' %}"
+            >SignUp</a
+          >
+          <a class="dropdown-item login admin" href="{% url 'login' %}"
+            >Login</a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Initialize the dropdown component -->
+      <script>
+        $(document).ready(function () {
+          $(".dropdown-toggle").dropdown();
+        });
+      </script>
+    </nav>
+    <div>{% block body_block %} {% endblock %}</div>
+  </body>
+</html>
